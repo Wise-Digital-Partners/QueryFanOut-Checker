@@ -14,14 +14,18 @@ st.set_page_config(
 st.title("Gemini Query Fan-Out Analyzer")
 st.markdown("This app analyzes a URL's content to predict potential Google AI Mode query fan-out and identify content gaps.")
 
-api_key = st.text_input("Enter your Gemini API Key", type="password")
+# Retrieve the API key from Streamlit secrets
+try:
+    api_key = st.secrets["gemini"]["api_key"]
+except KeyError:
+    st.error("Gemini API key not found. Please add it to your Streamlit secrets file.")
+    st.stop() # Stop the app if the key is not found
+
 url = st.text_input("Enter the URL to analyze")
 
 # Button to trigger the analysis
 if st.button("Analyze URL"):
-    if not api_key:
-        st.error("Please enter your Gemini API key.")
-    elif not url:
+    if not url:
         st.error("Please enter a URL.")
     else:
         try:
