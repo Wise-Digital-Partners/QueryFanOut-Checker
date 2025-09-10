@@ -16,9 +16,7 @@ st.markdown("This app analyzes a URL's content to predict potential Google AI Mo
 
 # Retrieve the API key from Streamlit secrets
 try:
-    # Get the API key from Streamlit secrets
-    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-    genai.configure(api_key=GEMINI_API_KEY)
+    api_key = st.secrets["gemini"]["api_key"]
 except KeyError:
     st.error("Gemini API key not found. Please add it to your Streamlit secrets file.")
     st.stop() # Stop the app if the key is not found
