@@ -140,7 +140,7 @@ FOLLOW-UP POTENTIAL:
 COVERAGE SCORE: [X/10 queries covered]
 RECOMMENDATIONS: [Specific content gaps to fill]"""
 
-                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-preview-05-20:generateContent?key={api_key}"
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key={api_key}"
                 request_data = {
                     "contents": [{
                         "parts": [{
