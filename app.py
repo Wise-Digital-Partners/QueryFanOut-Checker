@@ -16,9 +16,7 @@ st.markdown("This app analyzes a URL's content to predict potential Google AI Mo
 
 # Retrieve the API key from Streamlit secrets
 try:
-    # Get the API key from Streamlit secrets
-    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-    genai.configure(api_key=GEMINI_API_KEY)
+    api_key = st.secrets["gemini"]["api_key"]
 except KeyError:
     st.error("Gemini API key not found. Please add it to your Streamlit secrets file.")
     st.stop() # Stop the app if the key is not found
@@ -49,7 +47,8 @@ if st.button("Analyze URL"):
                     
                     # Extract title and main heading
                     title = soup.title.string if soup.title else ''
-                    h1 = soup.find('h1')?.text.strip() if soup.find('h1') else ''
+                    h1_element = soup.find('h1')
+                    h1 = h1_element.text.strip() if h1_element else ''
                     if title or h1:
                         chunks.append({
                             'type': 'primary_topic',
